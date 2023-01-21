@@ -8,7 +8,7 @@ import specificStreamer
 
 t = tk.Tk()
 bS = basicStreamer.BasicStream()
-sS = specificStreamer.SpecificStreamer()
+sS = specificStreamer.SpecificStreamer("tcp://0.0.0.0:5556")
 
 # Class so store window parameters not a cheap white phosphorus joke
 wp = windowParams.Params()
