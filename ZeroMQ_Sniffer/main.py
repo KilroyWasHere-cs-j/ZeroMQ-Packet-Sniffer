@@ -1,7 +1,6 @@
 import cv2
 import imagezmq
 import datetime
-import time
 
 
 def getTime():

@@ -1,0 +1,6 @@
+pip3 install opencv-python
+pip3 install imagezmq
+pip3 install datetime
+pip3 install socket
+pip3 install time
+pip3 install imutils
