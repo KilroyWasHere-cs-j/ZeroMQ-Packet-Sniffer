@@ -1,4 +1,5 @@
  # run this program on each RPi to send a labelled image stream
+
 import socket
 import time
 from imutils.video import VideoStream

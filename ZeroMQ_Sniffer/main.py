@@ -1,6 +1,42 @@
-import cv2
-import imagezmq
 import datetime
+import tkinter as tk
+import windowParams
+
+import basicStreamer
+import specificStreamer
+
+
+t = tk.Tk()
+bS = basicStreamer.BasicStream()
+sS = specificStreamer.SpecificStreamer()
+
+# Class so store window parameters not a cheap white phosphorus joke
+wp = windowParams.Params()
+
+
+def exit():
+    t.destroy()
+    exit(1)
+
+
+def start_stream():
+    print("Starting video stream")
+    stream()
+
+
+def createButton(window, button_text, width, command):
+    button = tk.Button(window, text=button_text, width=width, command=command)
+    button.pack()
+
+
+def load_ui():
+    t.title = wp.title
+    t.geometry(wp.geo)
+
+    createButton(t, wp.exitBTN.name, wp.exitBTN.width, exit)
+    createButton(t, wp.startStreamBTN.name, wp.startStreamBTN.width, start_stream)
+
+    t.mainloop()
 
 
 def getTime():
@@ -8,29 +44,14 @@ def getTime():
 
 
 def stream():
-    image_hub = imagezmq.ImageHub()
     print("Reading in video")
     print("Kilroy Was Here")
-    while True:  # show streamed images until Ctrl-C
-        rpi_name, image = image_hub.recv_image()
+    bS.Stream()
 
-        # font which we will be using to display FPS
-        font = cv2.FONT_HERSHEY_SIMPLEX
-
-
-        cv2.imshow(rpi_name, image)  # 1 window for each RPi
-
-        # used to record the time when we processed last frame
-        # we will be subtracting it to get more accurate result
-        print("Frame at {0}".format(getTime()))
-
-        cv2.waitKey(1)
-
-        image_hub.send_reply(b'OK')
 
 def main():
-    print("Ready to handle video")
-    stream()
+    print("Loading UI")
+    load_ui()
 
 
 if __name__ == "__main__":
